@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+   <title> The Clicker Game</title>
+
+    <style>
+        #shape
+        {
+            height: 150px;width: 150px;background-color: coral;display: none;position: relative;
+        }
+        h1
+        {
+            text-align: center;color: cornflowerblue;font-family:cursive;
+
+        }
+    </style>
+</head>
+<body>
+<h1><marquee>THE CLICKER</marquee> </h1>
+<h2>Click on the shape to start</h2>
+<p>Time taken to click:<span id="timetaken"></span></p>
+<div id="shape"></div>
+<script>
+
+        function randomcolor()
+     {
+         var letters = '0123456789ABCDEF'.split('');
+         var color = '#';
+         for(var i = 0;i < 6;i++)
+         {
+             color += letters[Math.floor(Math.random()*16)];
+         }
+         return color;
+     }
+    var shapeappear = function()
+    {
+        var top = Math.random()* 400;
+         var left = Math.random()* 400;
+        var width = Math.random()*400;
+        var height = Math.random()*400;
+        if (Math.random() > 0.5)
+        {
+            document.getElementById("shape").style.borderRadius = "50%";
+        }
+        else
+        {
+                document.getElementById("shape").style.borderRadius = "0";
+        }
+        document.getElementById("shape").style.backgroundColor = randomcolor();
+        document.getElementById("shape").style.top = top + "px";
+        document.getElementById("shape").style.left = left + "px";
+        document.getElementById("shape").style.width = width + "px";
+        document.getElementById("shape").style.height = height + "px";
+        document.getElementById("shape").style.display = "block";
+          start = new Date().getTime();
+    }
+     function finalappear(){
+        setTimeout(shapeappear,Math.random()* 2000);
+     }
+    finalappear();
+    document.getElementById("shape").onclick = function()
+    {
+        document.getElementById("shape").style.display = "none";
+        var end = new Date().getTime();
+        var timetaken = (end - start)/1000;
+        document.getElementById("timetaken").innerHTML = timetaken + " seconds";
+        finalappear();
+    }
+    
+
+</script>
+</body>
+</html>
